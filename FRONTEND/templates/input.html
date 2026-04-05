@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Enter Symptoms</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet">
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+ .bgded {
+  background-image: url("{% static 'images/medicine_img2.jpg' %}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+   form {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 20px;
+
+  width: 480px;
+  max-width: 90%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-sizing: border-box;   /* 🔥 Important */
+}
+
+#bloodBox {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+#bloodBox h3 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.input100 {
+  width: 100%;
+  height: 50px;
+
+  padding: 0 18px;   /* left-right only */
+  border-radius: 12px;
+
+  border: none;
+  font-size: 15px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-sizing: border-box;   /* 🔥 Very important */
+}
+input,
+select {
+  height: 50px;
+}
+.input100:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+}
+input, select {
+  height: 48px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+    .btn {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+    h2, h3 {
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="bgded">
+
+<form action="{% url 'output' %}" method="post" novalidate>
+{% csrf_token %}
+
+<h2>Enter Your Symptoms</h2>
+
+<!-- BASIC INFO -->
+<input class="input100" type="number" name="age" placeholder="Age" required>
+
+<select class="input100" name="gender" required>
+  <option value="">Select Gender</option>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+  <option value="other">Other</option>
+</select>
+
+<!-- SYMPTOMS DROPDOWN -->
+<select id="symptom-list" class="input100" onchange="handleSymptomSelect()">
+  <option value="">Select a symptom</option>
+
+
+
+  <option value="blood sample">Blood Sample</option>
+    <option value="heart sample">Heart Disease</option>
+
+
+  <option value="itching">Itching</option>
+  <option value="skin_rash">Skin Rash</option>
+  <option value="nodal_skin_eruptions">Nodal Skin Eruptions</option>
+  <option value="continuous_sneezing">Continuous Sneezing</option>
+  <option value="shivering">Shivering</option>
+  <option value="chills">Chills</option>
+  <option value="joint_pain">Joint Pain</option>
+  <option value="stomach_pain">Stomach Pain</option>
+  <option value="acidity">Acidity</option>
+  <option value="ulcers_on_tongue">Ulcers on Tongue</option>
+  <option value="muscle_wasting">Muscle Wasting</option>
+  <option value="vomiting">Vomiting</option>
+  <option value="burning_micturition">Burning Micturition</option>
+  <option value="spotting_urination">Spotting Urination</option>
+  <option value="fatigue">Fatigue</option>
+  <option value="weight_gain">Weight Gain</option>
+  <option value="anxiety">Anxiety</option>
+  <option value="cold_hands_and_feets">Cold Hands and Feet</option>
+  <option value="mood_swings">Mood Swings</option>
+  <option value="weight_loss">Weight Loss</option>
+  <option value="restlessness">Restlessness</option>
+  <option value="lethargy">Lethargy</option>
+  <option value="patches_in_throat">Patches in Throat</option>
+  <option value="cough">Cough</option>
+  <option value="high_fever">High Fever</option>
+  <option value="headache">Headache</option>
+  <option value="loss_of_appetite">Loss of Appetite</option>
+  <option value="pain_behind_the_eyes">Pain Behind the Eyes</option>
+  <option value="back_pain">Back Pain</option>
+  <option value="abdominal_pain">Abdominal Pain</option>
+  <option value="diarrhoea">Diarrhoea</option>
+  <option value="mild_fever">Mild Fever</option>
+  <option value="yellowish_skin">Yellowish Skin</option>
+  <option value="dark_urine">Dark Urine</option>
+  <option value="nausea">Nausea</option>
+  <option value="muscle_pain">Muscle Pain</option>
+  <option value="red_spots_over_body">Red Spots Over Body</option>
+  <option value="belly_pain">Belly Pain</option>
+  <option value="watering_from_eyes">Watering From Eyes</option>
+</select>
+
+<input class="input100" type="text" id="symptoms" name="symptoms"
+       placeholder="Selected symptoms (comma separated)">
+
+<input type="hidden" name="mode" id="mode">
+
+<!-- FEVER DETAILS -->
+<div id="feverBox" style="display:none;">
+  <h3>Fever Details</h3>
+
+  <!-- BMI -->
+  <input class="input100" type="number" step="0.1"
+         name="bmi" placeholder="BMI" required>
+
+  <!-- Smoking -->
+  <select class="input100" name="smoking_history" required>
+    <option value="">Smoking History</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <!-- Alcohol -->
+  <select class="input100" name="alcohol_consumption" required>
+    <option value="">Alcohol Consumption</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <!-- Headache -->
+  <select class="input100" name="headache" required>
+    <option value="">Headache</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <!-- Body Ache -->
+  <select class="input100" name="body_ache" required>
+    <option value="">Body Ache</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <!-- Fatigue -->
+  <select class="input100" name="fatigue" required>
+    <option value="">Fatigue</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <!-- Fever Severity -->
+  <select class="input100" name="fever_severity" required>
+    <option value="">Fever Severity</option>
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+</div>
+
+
+<!-- BLOOD SAMPLE DETAILS -->
+<!-- BLOOD SAMPLE DETAILS -->
+<div id="bloodBox" style="display:none;">
+  <h3>Blood Sample Details</h3>
+
+  <select class="input100" name="fever" required>
+    <option value="">Fever</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+
+  <select class="input100" name="temperature" required>
+    <option value="">Temperature (°C)</option>
+    <option value="36.5-37.5">36.5 - 37.5 (Normal)</option>
+    <option value="37.6-38.5">37.6 - 38.5 (Mild Fever)</option>
+    <option value="38.6-39.5">38.6 - 39.5 (High Fever)</option>
+    <option value="39.6-41.0">39.6 - 41.0 (Very High)</option>
+  </select>
+
+  <select class="input100" name="pulse" required>
+    <option value="">Pulse</option>
+    <option value="60-70">60 - 70 (Low)</option>
+    <option value="70-80">70 - 80 (Normal)</option>
+    <option value="80-90">80 - 90 (High)</option>
+  </select>
+
+  <select class="input100" name="bp_sys" required>
+    <option value="">BP Systolic</option>
+    <option value="110-120">110 - 120 (Normal)</option>
+    <option value="121-130">121 - 130 (High)</option>
+  </select>
+
+  <select class="input100" name="bp_dia" required>
+    <option value="">BP Diastolic</option>
+    <option value="70-75">70 - 75 (Normal)</option>
+    <option value="76-85">76 - 85 (High)</option>
+  </select>
+
+  <select class="input100" name="spo2" required>
+    <option value="">SpO2</option>
+    <option value="96-97">96 - 97 (Normal)</option>
+    <option value="98-100">98 - 100 (Good)</option>
+  </select>
+
+  <select class="input100" name="hemoglobin" required>
+    <option value="">Hemoglobin</option>
+    <option value="6.5-9">6.5 - 9 (Low)</option>
+    <option value="9-12">9 - 12 (Medium)</option>
+    <option value="12-15.5">12 - 15.5 (Normal)</option>
+  </select>
+
+  <select class="input100" name="wbc" required>
+    <option value="">WBC</option>
+    <option value="3000-6000">3000 - 6000 (Low)</option>
+    <option value="6001-12000">6001 - 12000 (Normal)</option>
+    <option value="12001-17999">12001 - 17999 (High)</option>
+  </select>
+
+  <select class="input100" name="platelets" required>
+    <option value="">Platelets</option>
+    <option value="30052-100000">30052 - 100000 (Low)</option>
+    <option value="100001-250000">100001 - 250000 (Normal)</option>
+    <option value="250001-349978">250001 - 349978 (High)</option>
+  </select>
+
+  <select class="input100" name="rbc" required>
+    <option value="">RBC</option>
+    <option value="2.8-4">2.8 - 4 (Low)</option>
+    <option value="4.1-5">4.1 - 5 (Normal)</option>
+    <option value="5.1-5.8">5.1 - 5.8 (High)</option>
+  </select>
+
+  <select class="input100" name="esr" required>
+    <option value="">ESR</option>
+    <option value="5-20">5 - 20 (Normal)</option>
+    <option value="21-40">21 - 40 (Moderate)</option>
+    <option value="41-65">41 - 65 (High)</option>
+  </select>
+
+  <select class="input100" name="crp" required>
+    <option value="">CRP</option>
+    <option value="Normal">Normal</option>
+    <option value="High">High</option>
+  </select>
+
+  <select class="input100" name="dengue" required>
+    <option value="">Dengue NS1</option>
+    <option value="Positive">Positive</option>
+    <option value="Negative">Negative</option>
+  </select>
+
+  <select class="input100" name="malaria" required>
+    <option value="">Malaria Parasite</option>
+    <option value="Positive">Positive</option>
+    <option value="Negative">Negative</option>
+  </select>
+
+  <select class="input100" name="widal" required>
+    <option value="">Widal Test</option>
+    <option value="Positive">Positive</option>
+    <option value="Negative">Negative</option>
+  </select>
+
+</div>
+    <button type="submit" class="btn">Predict Disease</button>
+
+</form>
+</div>
+
+<script>
+function handleSymptomSelect() {
+  const select = document.getElementById("symptom-list");
+  const value = select.value;
+  const box = document.getElementById("symptoms");
+
+  if (value === "blood sample") {
+      window.location.href = "{% url 'blood_input' %}";
+      return;
+  }
+  if (value === "heart sample") {
+    window.location.href = "{% url 'heart_input' %}";
+    return;
+}
+
+  if (value !== "") {
+      box.value += box.value ? ", " + value : value;
+  }
+
+  select.selectedIndex = 0;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Heart Input</title>
+
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet">
+
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* ✅ FIXED BACKGROUND */
+.bgded {
+    background-image: url("{% static 'images/heart_img.jpeg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FORM BOX */
+.form-box {
+    background: rgba(0,0,0,0.8);
+    padding: 25px;
+    border-radius: 10px;
+    width: 420px;
+    color: white;
+}
+
+/* INPUT */
+.input100 {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+}
+
+/* LABEL */
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="bgded">
+<div class="form-box">
+
+<form action="{% url 'output' %}" method="post">
+{% csrf_token %}
+
+<input type="hidden" name="mode" value="heart">
+
+<h2 style="text-align:center;">❤️ Heart Disease Details</h2>
+
+<!-- AGE -->
+<label>Age</label>
+<select class="input100" name="age">
+<option value="">Select Age</option>
+{% for i in range_age %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- GENDER -->
+<label>Gender</label>
+<select class="input100" name="Gender">
+<option value="">Select Gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
+
+<!-- EDUCATION -->
+<label>Education</label>
+<select class="input100" name="education">
+<option value="">Select Education</option>
+<option value="1">Uneducated</option>
+<option value="2">Primary</option>
+<option value="3">Graduate</option>
+<option value="4">Post Graduate</option>
+</select>
+
+<!-- SMOKER -->
+<label>Smoker</label>
+<select class="input100" name="currentSmoker">
+<option value="">Select</option>
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+
+<!-- CIGS -->
+<label>Cigarettes Per Day</label>
+<select class="input100" name="cigsPerDay">
+<option value="">Select</option>
+{% for i in range_cigs %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- BP MEDS -->
+<label>Blood Pressure Medicines</label>
+<select class="input100" name="BPMeds">
+<option value="">Select</option>
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+
+<!-- STROKE -->
+<label>Stroke History</label>
+<select class="input100" name="prevalentStroke">
+<option value="">Select</option>
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+
+<!-- HYPERTENSION -->
+<label>Hypertension</label>
+<select class="input100" name="prevalentHyp">
+<option value="">Select</option>
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+
+<!-- DIABETES -->
+<label>Diabetes</label>
+<select class="input100" name="diabetes">
+<option value="">Select</option>
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+
+<!-- CHOLESTEROL -->
+<label>Cholesterol</label>
+<select class="input100" name="totChol">
+<option value="">Select</option>
+{% for i in range_chol %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- SYS BP -->
+<label>Systolic Blood Pressure</label>
+<select class="input100" name="sysBP">
+<option value="">Select</option>
+{% for i in range_sysBP %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- DIA BP -->
+<label>Diastolic Blood Pressure</label>
+<select class="input100" name="diaBP">
+<option value="">Select</option>
+{% for i in range_diaBP %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- BMI -->
+<label>Body Mass Index</label>
+<select class="input100" name="BMI">
+<option value="">Select</option>
+{% for i in range_bmi %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- HEART RATE -->
+<label>Heart Rate</label>
+<select class="input100" name="heartRate">
+<option value="">Select</option>
+{% for i in range_hr %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<!-- GLUCOSE -->
+<label>Glucose</label>
+<select class="input100" name="glucose">
+<option value="">Select</option>
+{% for i in range_glucose %}
+<option value="{{ i }}">{{ i }}</option>
+{% endfor %}
+</select>
+
+<button class="btn">Predict</button>
+
+</form>
+
+</div>
+</div>
+
+</body>
+</html>

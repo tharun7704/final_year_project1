@@ -1,0 +1,296 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Register – SmartMediCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+
+    .bgded {
+      background-image: url("{% static 'images/medicine_img3.png' %}");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 16px;
+    }
+
+    .register-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 44px 40px 36px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+      animation: fadeUp 0.55s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .icon-badge {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#00c6ff,#0072ff);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 4px 20px rgba(0,114,255,0.45);
+    }
+    .icon-badge i { font-size:28px; color:#fff; }
+
+    h2 {
+      font-size:1.75rem; font-weight:800; color:#fff;
+      margin:0 0 6px;
+      text-shadow:0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .subtitle { font-size:0.92rem; color:rgba(255,255,255,0.82); margin:0 0 28px; }
+
+    .input-group { position:relative; margin-bottom:18px; text-align:left; }
+
+    .input-group label {
+      display:block; font-size:0.8rem; font-weight:700;
+      color:rgba(255,255,255,0.9); margin-bottom:6px;
+      letter-spacing:0.8px; text-transform:uppercase;
+    }
+
+    .input-wrap { position:relative; }
+
+    .input-wrap i {
+      position:absolute; left:14px; top:50%;
+      transform:translateY(-50%);
+      color:#aaa; font-size:15px; pointer-events:none;
+    }
+
+    .input100 {
+      width:100%; padding:11px 14px 11px 40px;
+      border:1.5px solid rgba(255,255,255,0.3);
+      border-radius:10px; font-size:15px; font-family:inherit;
+      background:rgba(255,255,255,0.92); color:#222;
+      transition:border-color 0.25s,box-shadow 0.25s; outline:none;
+    }
+    .input100:focus {
+      border-color:#00aaff;
+      box-shadow:0 0 0 3px rgba(0,170,255,0.25);
+    }
+
+    .strength-bar {
+      height:4px; border-radius:4px; margin-top:7px;
+      background:rgba(255,255,255,0.15); overflow:hidden;
+    }
+    .strength-fill {
+      height:100%; border-radius:4px; width:0%;
+      transition:width 0.35s,background 0.35s;
+    }
+    .strength-label {
+      font-size:0.72rem; color:rgba(255,255,255,0.7);
+      margin-top:4px; min-height:14px;
+    }
+
+    .error-msg {
+      background:rgba(255,80,80,0.2);
+      border:1px solid rgba(255,80,80,0.5);
+      color:#ffe0e0; border-radius:8px;
+      padding:9px 14px; font-size:0.85rem;
+      margin-bottom:18px;
+      display:flex; align-items:center; gap:8px;
+    }
+
+    .btn-register {
+      width:100%; padding:12px; border:none;
+      border-radius:10px; font-size:15px; font-family:inherit;
+      font-weight:800; cursor:pointer;
+      background:linear-gradient(135deg,#007bff,#0056d6);
+      color:#fff;
+      box-shadow:0 4px 18px rgba(0,86,214,0.45);
+      transition:transform 0.15s,box-shadow 0.15s;
+      margin-top:6px; letter-spacing:0.5px;
+    }
+    .btn-register:hover {
+      transform:translateY(-2px);
+      box-shadow:0 6px 22px rgba(0,86,214,0.6);
+    }
+    .btn-register:active { transform:translateY(0); }
+
+    .divider {
+      display:flex; align-items:center; gap:10px;
+      margin:22px 0 18px;
+    }
+    .divider span { flex:1; height:1px; background:rgba(255,255,255,0.25); }
+    .divider p { font-size:0.78rem; color:rgba(255,255,255,0.6); margin:0; }
+
+    .login-link { font-size:0.88rem; color:rgba(255,255,255,0.8); }
+    .login-link a { color:#7dd4fc; font-weight:700; text-decoration:none; }
+    .login-link a:hover { color:#fff; }
+
+    /* Team section – same as index.html */
+    .team-section {
+      background-color:rgba(255,255,255,0.9);
+      margin:50px auto; padding:40px 20px;
+      border-radius:10px; max-width:900px; width:90%;
+      text-align:center;
+      box-shadow:0 0 10px rgba(0,0,0,0.15);
+    }
+    .team-section h3 { font-size:2rem; color:#333; margin-bottom:15px; }
+    .team-content { display:flex; flex-direction:column; align-items:center; gap:20px; }
+    .college-info,.team-info,.guide-info { text-align:center; line-height:1.6; }
+    .team-info p,.guide-info p,.college-info p { margin:5px 0; }
+
+    @media (max-width:600px) {
+      .register-card { padding:32px 22px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bgded">
+    <div class="register-card">
+
+      <div class="icon-badge">
+        <i class="fa-solid fa-user-plus"></i>
+      </div>
+
+      <h2>Create Account</h2>
+      <p class="subtitle">Register to access SmartMediCare</p>
+
+      {% if error %}
+        <div class="error-msg">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          {{ error }}
+        </div>
+      {% endif %}
+
+      <!-- POST to /register/ — register_view saves the user, then redirects to success -->
+      <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="input-group">
+          <label for="reg-name">Username</label>
+          <div class="input-wrap">
+            <input
+              id="reg-name"
+              class="input100"
+              type="text"
+              name="name"
+              placeholder="Choose a username"
+              autocomplete="username"
+              required
+            >
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="reg-pass">Password</label>
+          <div class="input-wrap">
+            <input
+              id="reg-pass"
+              class="input100"
+              type="password"
+              name="password"
+              placeholder="Create a password (min 6 chars)"
+              autocomplete="new-password"
+              required
+              oninput="checkStrength(this.value)"
+            >
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="strength-bar"><div class="strength-fill" id="str-fill"></div></div>
+          <div class="strength-label" id="str-label"></div>
+        </div>
+
+        <button type="submit" class="btn-register">
+          <i class="fa-solid fa-user-check" style="margin-right:6px;"></i>Register
+        </button>
+      </form>
+
+      <div class="divider"><span></span><p>already have an account?</p><span></span></div>
+
+      <div class="login-link">
+        <a href="{% url 'home' %}">
+          <i class="fa-solid fa-arrow-left" style="font-size:0.8rem; margin-right:4px;"></i>Back to Login
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="team-section">
+    <h3>👥 Project Team</h3>
+    <p><i>The Project <b>SmartMediCare: AI-Powered Disease Diagnosis & Drug Advisory System</b> is developed by the team</i></p>
+    <div class="team-content">
+      <div class="college-info">
+        <h4><u>College</u></h4>
+        <p><b>Sri Venkateswara College of Engineering, Tirupati</b></p>
+        <p><i>B. Tech - Computer Science and Engineering</i></p>
+        <p>IV Year - A Section</p>
+        <p>Project Team - 3</p>
+      </div>
+      <div class="team-info">
+        <h4><u>Team</u></h4>
+        <p><b>ARAI THARUN</b> – <i>22BFA05009</i></p>
+        <p><b>C DIVYA SREE</b> – <i>22BFA05029</i></p>
+        <p><b>CHAKRALA NIHARIKA</b> – <i>22BFA05032</i></p>
+        <p><b>GUDI GURU SAI</b> – <i>22BFA05044</i></p>
+      </div>
+      <div class="guide-info">
+        <h4><u>Under the Guidance of</u></h4>
+        <p><b>Dr.Y.A Siva Prasad</b>, M.Tech</p>
+        <p>Assistant Professor</p>
+        <p><i>Department of Computer Science and Engineering</i></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'layout/scripts/jquery.min.js' %}"></script>
+  <script src="{% static 'layout/scripts/jquery.backtotop.js' %}"></script>
+  <script src="{% static 'layout/scripts/jquery.mobilemenu.js' %}"></script>
+
+  <script>
+    function checkStrength(val) {
+      const fill  = document.getElementById("str-fill");
+      const label = document.getElementById("str-label");
+      let score = 0;
+      if (val.length >= 6)                         score++;
+      if (val.length >= 10)                        score++;
+      if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+      if (/\d/.test(val))                          score++;
+      if (/[^A-Za-z0-9]/.test(val))               score++;
+      const levels = [
+        {pct:"0%",   color:"transparent", text:""},
+        {pct:"25%",  color:"#ef4444",     text:"Weak"},
+        {pct:"50%",  color:"#f97316",     text:"Fair"},
+        {pct:"75%",  color:"#eab308",     text:"Good"},
+        {pct:"100%", color:"#22c55e",     text:"Strong"},
+      ];
+      const lv = levels[Math.min(score,4)];
+      fill.style.width      = lv.pct;
+      fill.style.background = lv.color;
+      label.textContent     = val.length ? lv.text : "";
+      label.style.color     = lv.color;
+    }
+  </script>
+
+</body>
+</html>

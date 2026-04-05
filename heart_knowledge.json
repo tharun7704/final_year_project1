@@ -1,0 +1,73 @@
+{
+  "yes": {
+    "description": [
+      "The prediction indicates a potential risk of cardiovascular disease.",
+      "This condition may involve narrowing or blockage of blood vessels, increasing the risk of heart attack or stroke.",
+      "Early detection and proper management can significantly reduce complications."
+    ],
+    "cause": [
+      "High blood pressure (Hypertension)",
+      "Elevated cholesterol levels",
+      "Smoking and tobacco use",
+      "Diabetes and insulin resistance",
+      "Obesity and sedentary lifestyle",
+      "Genetic predisposition"
+    ],
+    "treatment": [
+      "Lifestyle modification including diet and exercise",
+      "Pharmacological treatment as prescribed by a physician",
+      "Regular monitoring of blood pressure and cholesterol",
+      "In severe cases, surgical interventions like angioplasty or bypass surgery"
+    ],
+    "medicines": [
+      "Aspirin (Antiplatelet agent)",
+      "Statins (Cholesterol-lowering drugs)",
+      "Beta-blockers",
+      "ACE inhibitors or ARBs",
+      "Calcium channel blockers"
+    ],
+    "diet": [
+      "Low-fat and low-cholesterol diet",
+      "Increase intake of fruits, vegetables, and whole grains",
+      "Reduce salt (sodium) intake",
+      "Avoid processed and junk foods",
+      "Include omega-3 rich foods like fish and nuts"
+    ],
+    "workout": [
+      "Daily walking (30–45 minutes)",
+      "Light aerobic exercises",
+      "Yoga and breathing exercises",
+      "Avoid heavy or high-intensity workouts without medical advice"
+    ],
+    "precautions": [
+      "Quit smoking and avoid alcohol",
+      "Monitor blood pressure regularly",
+      "Maintain healthy body weight",
+      "Follow prescribed medications strictly",
+      "Regular health checkups with a cardiologist"
+    ]
+  },
+
+  "No": {
+    "description": [
+      "No significant risk of heart disease is detected based on the provided parameters.",
+      "However, maintaining a healthy lifestyle is essential to prevent future complications."
+    ],
+    "diet": [
+      "Maintain a balanced diet rich in nutrients",
+      "Include fruits, vegetables, and whole grains",
+      "Limit saturated fats and sugar intake"
+    ],
+    "workout": [
+      "Regular physical activity (at least 30 minutes daily)",
+      "Walking, jogging, or light cardio exercises",
+      "Maintain an active lifestyle"
+    ],
+    "precautions": [
+      "Routine health checkups",
+      "Maintain normal blood pressure and cholesterol levels",
+      "Avoid smoking and excessive alcohol consumption",
+      "Stay physically active"
+    ]
+  }
+}

@@ -1,0 +1,369 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Welcome – SmartMediCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:  #0072ff;
+      --cyan:  #00c6ff;
+      --green: #22c55e;
+      --dark:  #0a0f1e;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Nunito', sans-serif;
+      background: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── Animated gradient background ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(0,114,255,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(0,198,255,0.2)  0%, transparent 55%),
+                  radial-gradient(ellipse at 60% 80%, rgba(34,197,94,0.15) 0%, transparent 50%),
+                  #0a0f1e;
+      animation: bgShift 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgShift {
+      0%   { filter: hue-rotate(0deg);  }
+      100% { filter: hue-rotate(15deg); }
+    }
+
+    /* ── Floating particles ── */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(110vh) scale(0);   opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-10vh)  scale(1.2); opacity: 0; }
+    }
+
+    /* ── Main wrapper ── */
+    .page {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      text-align: center;
+    }
+
+    /* ── Success card ── */
+    .card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 56px 48px 48px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow:
+        0 0 0 1px rgba(0,198,255,0.1),
+        0 32px 80px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: scale(0.88) translateY(40px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    /* ── Checkmark animation ── */
+    .check-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.5);
+      animation: pulse 2s ease-out 0.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0    rgba(34,197,94,0.5); }
+      70%  { box-shadow: 0 0 0 22px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0    rgba(34,197,94,0); }
+    }
+
+    .check-wrap i {
+      font-size: 38px;
+      color: #fff;
+      animation: checkPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+    }
+
+    @keyframes checkPop {
+      from { transform: scale(0) rotate(-20deg); }
+      to   { transform: scale(1) rotate(0deg);   }
+    }
+
+    /* ── Text ── */
+    .title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      animation: fadeUp 0.5s ease 0.5s both;
+    }
+
+    .title span {
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeUp 0.5s ease 0.6s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* ── Features row ── */
+    .features {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      animation: fadeUp 0.5s ease 0.7s both;
+    }
+
+    .feat {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 14px 18px;
+      flex: 1;
+      min-width: 110px;
+      max-width: 140px;
+    }
+
+    .feat i {
+      font-size: 22px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .feat p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+    }
+
+    /* ── CTA button ── */
+    .btn-login {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--blue), #005fcc);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(0,114,255,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeUp 0.5s ease 0.8s both;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 34px rgba(0,114,255,0.6);
+    }
+
+    .btn-login:active { transform: translateY(0); }
+
+    /* ── Auto-redirect bar ── */
+    .redirect-bar {
+      margin-top: 24px;
+      animation: fadeUp 0.5s ease 0.9s both;
+    }
+
+    .redirect-bar p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 200px;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      animation: progressAnim 5s linear 1s forwards;
+    }
+
+    @keyframes progressAnim {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    /* ── Brand tag ── */
+    .brand {
+      margin-top: 36px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      animation: fadeUp 0.5s ease 1s both;
+    }
+
+    .brand strong {
+      color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 40px 24px 36px; }
+      .title { font-size: 1.75rem; }
+      .feat { min-width: 90px; padding: 12px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg"></div>
+
+  <!-- Floating particles (generated by JS) -->
+  <div class="particles" id="particles"></div>
+
+  <div class="page">
+    <div class="card">
+
+      <!-- Success checkmark -->
+      <div class="check-wrap">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <h1 class="title">
+        Welcome,<br><span>{{ username }}!</span>
+      </h1>
+
+      <p class="subtitle">
+        Your account has been created successfully.<br>
+        You're all set to use <strong style="color:rgba(255,255,255,0.85)">SmartMediCare</strong> — your AI health companion.
+      </p>
+
+      <!-- Feature highlights -->
+      <div class="features">
+        <div class="feat">
+          <i class="fa-solid fa-stethoscope" style="color:#60a5fa;"></i>
+          <p>Disease Diagnosis</p>
+        </div>
+        <div class="feat">
+          <i class="fa-solid fa-pills" style="color:#a78bfa;"></i>
+          <p>Drug Advisory</p>
+        </div>
+        <div class="feat">
+          <i class="fa-solid fa-heart-pulse" style="color:#f87171;"></i>
+          <p>Heart Analysis</p>
+        </div>
+      </div>
+
+      <!-- Login CTA -->
+      <a href="{% url 'home' %}" class="btn-login">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        Proceed to Login
+      </a>
+
+      <!-- Auto-redirect countdown -->
+      <div class="redirect-bar">
+        <p>Redirecting you to login in 5 seconds…</p>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="brand"><strong>SmartMediCare</strong> &nbsp;·&nbsp; AI-Powered Health System</p>
+  </div>
+
+  <script>
+    // ── Generate floating particles ──────────────────────────
+    const container = document.getElementById("particles");
+    const colors    = ["#0072ff","#00c6ff","#22c55e","#a78bfa","#f472b6"];
+
+    for (let i = 0; i < 28; i++) {
+      const el  = document.createElement("div");
+      el.className = "particle";
+      const size = Math.random() * 10 + 4;
+      el.style.cssText = `
+        width:  ${size}px;
+        height: ${size}px;
+        left:   ${Math.random() * 100}%;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        animation-duration:  ${Math.random() * 12 + 8}s;
+        animation-delay:    -${Math.random() * 15}s;
+        opacity: 0.4;
+      `;
+      container.appendChild(el);
+    }
+
+    // ── Auto-redirect after 5s ───────────────────────────────
+    setTimeout(() => {
+      window.location.href = "{% url 'home' %}";
+    }, 6000);
+  </script>
+
+</body>
+</html>
